@@ -32,15 +32,22 @@ bool InfixToPostfix::is_lower_precedence(string _x, string _y) {
 }
 
 vector<string> InfixToPostfix::convertInPost_iterative(vector<string> _x) {
+  //initializing temporary variable
   vector<string> opstack;
   vector<string> statement = _x;
   vector<string> result;
 
+  //iterator to count the state
+  int n = 0;
+
   //iterating through the expression vector
+
   while(statement.size()>0) {
-    // print_vector(statement);
-    // print_vector(opstack);
-    // print_vector(result);
+    n++;
+    cout << endl << "STEP - " << n << endl;
+    cout << "expression vector = "; print_vector(statement);
+    cout << "operator stack = "; print_vector(opstack);
+    cout << "result vector = "; print_vector(result);
 
     //if its a variable then moving it (the head of expression) to the result tail
     if(is_operand(statement.front())) {
@@ -96,9 +103,20 @@ vector<string> InfixToPostfix::convertInPost_iterative(vector<string> _x) {
 
   //if the expression is already empty then make sure every operand got flushed in order (top to bottom)
   while(opstack.size()>0) {
+    n++;
+    cout << endl << "STEP - " << n << " FLUSHING REMAINING OPERATOR STACK" << endl;
+    cout << "expression vector = "; print_vector(statement);
+    cout << "operator stack = "; print_vector(opstack);
+    cout << "result vector = "; print_vector(result);
     result.push_back(opstack.back());
     opstack.pop_back();
   }
+
+  n++;
+  cout << endl << "STEP - " << n << endl;
+  cout << "expression vector = "; print_vector(statement);
+  cout << "operator stack = "; print_vector(opstack);
+  cout << "result vector = "; print_vector(result);
 
   return result;
 }
